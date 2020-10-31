@@ -1,0 +1,109 @@
+﻿@model IEnumerable<ShopWatches.Models.Product>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    var i = 0;
+}
+
+<div class="breadcrumbs">
+    <div class="breadcrumbs-inner">
+        <div class="row m-0">
+            <div class="col-sm-4">
+                <div class="page-header float-left">
+                    <div class="page-title">
+                        <h1>Dashboard</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="page-header float-right">
+                    <div class="page-title">
+                        <ol class="breadcrumb text-right">
+                            <li><a href="#">Admin</a></li>
+                            <li><a href="#">Product</a></li>
+                            <li class="active">List</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="content">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-12">
+                @Html.Partial("_MessgeAlert")
+                <div class="card">
+                    <div class="card-header">
+                        <b class="card-title">Product Management</b>
+                        <div style="float: right">
+                            @Html.ActionLink("Add new Product", "Create")
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Image</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">Quantities</th>
+                                    <th scope="col">Supplier</th>
+                                    <th scope="col">Origin</th>
+                                    <th scope="col">Warranty</th>
+                                    <th scope="col">Setting</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @*Html.DisplayFor() sẽ hiển thị DisplayTemplate phù hợp với loại của thuộc tính.*@
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <th scope="row">
+                                            @(++i)
+                                        </th>
+                                        <td class="avatar">
+                                            <div class="round-img">
+                                                <img style="width:70px" class="rounded-circle" src="@Html.DisplayFor(modelItem => item.img)" alt="">
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.name)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.price)$
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.quantities)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Supplier.nameSup)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.originName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.warrantyTime) Month
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-sm btn-light text-warning border" href="@Url.Action("Edit", "Products", new { id = item.ID })" title="Edit Product"><i class="fa fa-edit"></i></a>&nbsp;
+                                            <a class="btn btn-sm btn-light text-danger border" href=" @Url.Action("Delete", "Products", new { id = item.ID })" title="Delete Product" onclick="return confirm('Are you sure delete?')"><i class="fa fa-trash-o"></i></a>&nbsp;
+                                            <a class="btn btn-sm btn-light text-warning border" href="@Url.Action("Search", "Pictures", new { id = item.ID })" title="All Picture of Product"><i class="fa fa-picture-o"></i></a>&nbsp;
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- .animated -->
+</div>

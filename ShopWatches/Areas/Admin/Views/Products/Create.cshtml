@@ -1,0 +1,138 @@
+﻿@model ShopWatches.Models.Product
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="breadcrumbs">
+    <div class="breadcrumbs-inner">
+        <div class="row m-0">
+            <div class="col-sm-4">
+                <div class="page-header float-left">
+                    <div class="page-title">
+                        <h1>Dashboard</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="page-header float-right">
+                    <div class="page-title">
+                        <ol class="breadcrumb text-right">
+                            <li><a href="#">Admin</a></li>
+                            <li><a href="#">Product</a></li>
+                            <li class="active">Create</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@using (Html.BeginForm("Create", "Products", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="content">
+        <div class="animated fadeIn">
+
+
+
+            <div class="col-xs-12 col-sm-12">
+                @Html.Partial("_MessgeAlert")
+                <div class="card">
+                    <div class="card-header">
+                        <b>Add Product </b>
+                        <div style="float: right">
+                            @Html.ActionLink("Back to List", "Index")
+                        </div>
+                    </div>
+
+                    <div class="card-body card-block ">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class=" form-control-label">Name Product</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-user"></i></div>
+                                        @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control", required = "" } })
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    <label class=" form-control-label">Price Product</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-star-o"></i></div>
+                                        @Html.EditorFor(model => model.price, new { htmlAttributes = new { min = "1000", @class = "form-control", required = "" } })
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.price, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    <label class=" form-control-label">Quantities Product</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-star-o"></i></div>
+                                        @Html.EditorFor(model => model.quantities, new { htmlAttributes = new { required = "", min = "1", step = "1", Type = "number", @class = "form-control" } })
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.quantities, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    <label class=" form-control-label">Details Product</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-star-o"></i></div>
+                                        @Html.TextAreaFor(model => model.detail, new { @class = "form-control" } )
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.detail, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class=" form-control-label">Supplier Product</label>
+                                    <div class="input-group">
+                                       
+                                        <div class="input-group-addon"><i class="fa fa-star-o"></i></div>
+                                        @Html.DropDownList("SupplierID", null, htmlAttributes: new { @class = "form-control" })
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.SupplierID, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    <label class=" form-control-label">Origin Product</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-star-o"></i></div>
+                                        @Html.EditorFor(model => model.originName, new { htmlAttributes = new { @class = "form-control", required = "" } })
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.originName, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    <label class=" form-control-label">Warranty Time</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-star-o"></i></div>
+                                        @Html.EditorFor(model => model.warrantyTime, new { htmlAttributes = new { @class = "form-control" , required = "" } })
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.warrantyTime, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    <label class=" form-control-label">Image Product</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-star-o"></i></div>
+                                        @Html.EditorFor(model => model.img, new { htmlAttributes = new { @class = "form-control", required = "" } })
+                                    </div>
+                                    <a href="https://nghia-le2.imgbb.com/" target="_blank">Upload image in here</a>
+                                    @Html.ValidationMessageFor(model => model.img, "", new { @class = "text-danger" })
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 col-sm-4">
+                        <button type="submit" value="Create" class="btn btn-outline-success">Add new</button>&nbsp;
+                        <button type="reset" class="btn btn-outline-warning">Reset</button>&nbsp;
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+

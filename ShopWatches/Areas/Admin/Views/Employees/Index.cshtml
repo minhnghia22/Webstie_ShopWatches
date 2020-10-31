@@ -1,0 +1,107 @@
+﻿@model IEnumerable<ShopWatches.Models.Employee>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    var i = 0;
+}
+
+<div class="breadcrumbs">
+    <div class="breadcrumbs-inner">
+        <div class="row m-0">
+            <div class="col-sm-4">
+                <div class="page-header float-left">
+                    <div class="page-title">
+                        <h1>Dashboard</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="page-header float-right">
+                    <div class="page-title">
+                        <ol class="breadcrumb text-right">
+                            <li><a href="#">Admin</a></li>
+                            <li><a href="#">Employee</a></li>
+                            <li class="active">List</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="content">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-12">
+                @Html.Partial("_MessgeAlert")
+                <div class="card">
+                    <div class="card-header">
+                        <strong class="card-title">Employee Management</strong>
+                        <div style="float: right">
+                            @Html.ActionLink("Add Employee", "Create")
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Full Name</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Phone</th>
+                                    <th scope="col">ID Card</th>
+                                    <th scope="col">Gender</th>
+                                    <th scope="col">Birthday</th>
+                                    <th scope="col">Role</th>
+                                    <th scope="col">Setting</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @*Html.DisplayFor() sẽ hiển thị DisplayTemplate phù hợp với loại của thuộc tính.*@
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <th scope="row">
+                                            @(++i)
+                                        </th>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.nameEmp)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.emailEmp)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.phoneEmp)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.IDcard)
+                                        </td>
+                                         <td>
+                                            @Html.DisplayFor(modelItem => item.genderEmp)
+                                        </td>
+                                         <td>
+                                            @Html.DisplayFor(modelItem => item.birthdayEmp)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Role.name)
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-sm btn-light text-warning border" href="@Url.Action("Edit", "Employees", new { id = item.IDEmp })"><i class="fa fa-edit"></i></a>&nbsp;
+
+                                            <a class="btn btn-sm btn-light text-danger border" href=" @Url.Action("Delete", "Employees", new { id = item.IDEmp })" 
+                                               onclick="return confirm('Are you sure want delete?')"><i class="fa fa-trash-o"></i></a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- .animated -->
+</div>

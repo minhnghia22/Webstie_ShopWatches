@@ -1,0 +1,88 @@
+﻿@model ShopWatches.Models.Picture
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="breadcrumbs">
+    <div class="breadcrumbs-inner">
+        <div class="row m-0">
+            <div class="col-sm-4">
+                <div class="page-header float-left">
+                    <div class="page-title">
+                        <h1>Dashboard</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="page-header float-right">
+                    <div class="page-title">
+                        <ol class="breadcrumb text-right">
+                            <li><a href="#">Admin</a></li>
+                            <li><a href="#">Picture</a></li>
+                            <li class="active">Edit</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="content">
+        <div class="animated fadeIn">
+
+            <div class="row">
+
+                <div class="col-xs-12 col-sm-12">
+                    @Html.Partial("_MessgeAlert")
+                    <div class="card">
+                        <div class="card-header">
+                            <b>Edit Picture </b>
+                            <div style="float: right">
+                                @Html.ActionLink("Back to List", "Index")
+                            </div>
+                        </div>
+                        <div class="card-body card-block">
+                            <div class="form-group">
+                                <label class=" form-control-label">Choose product</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-user"></i></div>
+                                    @Html.DropDownList("productID", null, htmlAttributes: new { @class = "form-control" })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.productID, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                <label class=" form-control-label">URL Image</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-star-o"></i></div>
+                                    @Html.EditorFor(model => model.url, new { htmlAttributes = new { @class = "form-control", required = "" } })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.url, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                <label class=" form-control-label">Name Image</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-star-o"></i></div>
+                                    @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control", required = "" } })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-xs-4 col-sm-4">
+                            <button type="submit" value="Edit" class="btn btn-outline-success">Save</button>&nbsp;
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div><!-- .animated -->
+    </div>
+}
+
+

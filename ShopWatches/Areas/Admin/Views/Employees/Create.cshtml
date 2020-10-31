@@ -1,0 +1,157 @@
+﻿@model ShopWatches.Models.Employee
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<div class="breadcrumbs">
+    <div class="breadcrumbs-inner">
+        <div class="row m-0">
+            <div class="col-sm-4">
+                <div class="page-header float-left">
+                    <div class="page-title">
+                        <h1>Dashboard</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="page-header float-right">
+                    <div class="page-title">
+                        <ol class="breadcrumb text-right">
+                            <li><a href="#">Admin</a></li>
+                            <li><a href="#">Employee</a></li>
+                            <li class="active">Create</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="content">
+        <div class="animated fadeIn">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="col-xs-12 col-sm-12">
+                @Html.Partial("_MessgeAlert")
+                <div class="card">
+                    <div class="card-header">
+                        <b>Add Employee </b>
+                        <div style="float: right">
+                            @Html.ActionLink("Back to List", "Index")
+                        </div>
+                    </div>
+
+                    <div class="card-body card-block ">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class=" form-control-label">Full Name</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-user"></i></div>
+                                        @Html.EditorFor(model => model.nameEmp, new { htmlAttributes = new { @class = "form-control", required = "" } })
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.nameEmp, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    <label class=" form-control-label">Email</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-envelope-o"></i></div>
+                                        @Html.EditorFor(model => model.emailEmp, new { htmlAttributes = new {@class = "form-control", required = "" } })
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.emailEmp, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    <label class=" form-control-label">Phone</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-phone"></i></div>
+                                        @Html.EditorFor(model => model.phoneEmp, new { htmlAttributes = new { required = "", @class = "form-control" } })
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.phoneEmp, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    <label class=" form-control-label">Role</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-star-o"></i></div>
+                                        @Html.DropDownList("roleID", null, htmlAttributes: new { @class = "form-control" })
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.roleID, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    <label class=" form-control-label">Address</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-star-o"></i></div>
+                                        @Html.TextAreaFor(model => model.addressEmp, new { @class = "form-control" })
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.addressEmp, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class=" form-control-label">ID Card</label>
+                                    <div class="input-group">
+
+                                        <div class="input-group-addon"><i class="fa fa-male"></i></div>
+                                        @Html.EditorFor(model => model.IDcard, new { @class = "form-control" })
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.IDcard, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    <label class=" form-control-label">Birthday</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                                        <input class="form-control" type="date" name="birthdayEmp" id="birthdayEmp" value="@Html.DisplayFor(model => model.birthdayEmp)" required = ""  />
+
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.birthdayEmp, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    <label class=" form-control-label">Gender</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-male"></i></div>
+                                        <select class="form-control" name="genderEmp" id="genderEmp">
+                                            <option value="Female">Female</option>
+                                            <option value="Male">Male</option>
+                                        </select>
+
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.genderEmp, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    <label class=" form-control-label">Password</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-asterisk"></i></div>
+                                        @Html.EditorFor(model => model.passwordEmp, new { htmlAttributes = new { @class = "form-control", required = "" } })
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.passwordEmp, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    <label class=" form-control-label">Re-Password</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-asterisk"></i></div>
+                                        <input class="form-control" type="password" name="re-password" value="" />
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 col-sm-4">
+                        <button type="submit" value="Create" class="btn btn-outline-success">Add new</button>&nbsp;
+                        <button type="reset" class="btn btn-outline-warning">Reset</button>&nbsp;
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+

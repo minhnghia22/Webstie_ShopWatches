@@ -1,0 +1,11 @@
+﻿@if(ShopWatches.Library.Message.has_flash())
+{
+    ShopWatches.Models.MessageModel ms = ShopWatches.Library.Message.get_flash();
+<div class="sufee-alert alert with-close alert-@ms.msg_css alert-dismissible fade show">
+    <span class="badge badge-pill badge-@ms.msg_css">@ms.msg_css</span>
+    @ms.msg
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">×</span>
+    </button>
+</div>
+}

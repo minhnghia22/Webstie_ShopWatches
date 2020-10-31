@@ -1,0 +1,93 @@
+﻿@model IEnumerable<ShopWatches.Models.Picture>
+
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    var i = 0;
+}
+
+<div class="breadcrumbs">
+    <div class="breadcrumbs-inner">
+        <div class="row m-0">
+            <div class="col-sm-4">
+                <div class="page-header float-left">
+                    <div class="page-title">
+                        <h1>Dashboard</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="page-header float-right">
+                    <div class="page-title">
+                        <ol class="breadcrumb text-right">
+                            <li><a href="#">Admin</a></li>
+                            <li><a href="#">Picture</a></li>
+                            <li class="active">Search</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="content">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-12">
+                @Html.Partial("_MessgeAlert")
+                <div class="card">
+                    <div class="card-header">
+                        <strong class="card-title">Picture details of Product</strong>
+                        <div style="float: right">
+                            @Html.ActionLink("Add Picture", "Create")
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Product</th>
+                                    <th scope="col">Picture </th>
+                                    <th scope="col">Name Picture </th>
+                                    <th scope="col">Setting</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @*Html.DisplayFor() sẽ hiển thị DisplayTemplate phù hợp với loại của thuộc tính.*@
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <th scope="row">
+                                            @(++i)
+                                        </th>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Product.name)
+                                        </td>
+                                        <td class="avatar">
+                                            <div class="round-img">
+                                                <img style="width:70px" class="rounded-circle" src="@Html.DisplayFor(modelItem => item.url)" alt="">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.name)
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-sm btn-light text-warning border" href="@Url.Action("Edit", "Pictures", new { id = item.ID })"><i class="fa fa-edit"></i></a>&nbsp;
+
+                                            <a class="btn btn-sm btn-light text-danger border" href=" @Url.Action("Delete", "Pictures", new { id = item.ID })"
+                                               onclick="return confirm('Are you sure want delete?')"><i class="fa fa-trash-o"></i></a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- .animated -->
+</div>
