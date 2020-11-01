@@ -160,6 +160,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoriesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\Categories_ProductController.cs" />
     <Compile Include="Areas\Admin\Controllers\EmployeesController.cs" />
     <Compile Include="Areas\Admin\Controllers\PicturesController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductsController.cs" />
@@ -211,6 +212,9 @@
     <Content Include="Areas\Admin\Views\Employees\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Employees\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Employees\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Categories_Product\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Categories_Product\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Categories_Product\Index.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\_MessgeAlert.cshtml" />
     <None Include="Web.Debug.config">
