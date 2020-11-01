@@ -8,6 +8,12 @@ namespace ShopWatches.Models
 
     public partial class Category
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Category()
+        {
+            Categories_Product = new HashSet<Categories_Product>();
+        }
+
         public int ID { get; set; }
 
         [StringLength(50)]
@@ -15,5 +21,8 @@ namespace ShopWatches.Models
 
         [Column(TypeName = "text")]
         public string descrption { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Categories_Product> Categories_Product { get; set; }
     }
 }

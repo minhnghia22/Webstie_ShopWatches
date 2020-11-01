@@ -169,15 +169,17 @@
     </Compile>
     <Compile Include="Library\Message.cs" />
     <Compile Include="Library\Mystring.cs" />
+    <Compile Include="Models\Categories_Product.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\MessageModel.cs" />
+    <Compile Include="Models\ShopWatchesDbContext.cs" />
     <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\Orders_Details.cs" />
     <Compile Include="Models\Picture.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Role.cs" />
-    <Compile Include="Models\ShopWatchesDbContext.cs" />
     <Compile Include="Models\Supplier.cs" />
     <Compile Include="Models\Voucher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

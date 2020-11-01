@@ -13,9 +13,11 @@ namespace ShopWatches.Models
         }
 
         public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<Categories_Product> Categories_Product { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<Orders_Details> Orders_Details { get; set; }
         public virtual DbSet<Picture> Pictures { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
@@ -31,6 +33,11 @@ namespace ShopWatches.Models
             modelBuilder.Entity<Category>()
                 .Property(e => e.descrption)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<Category>()
+                .HasMany(e => e.Categories_Product)
+                .WithOptional(e => e.Category)
+                .HasForeignKey(e => e.CategoriesID);
 
             modelBuilder.Entity<Customer>()
                 .Property(e => e.emailCtm)
@@ -108,10 +115,6 @@ namespace ShopWatches.Models
 
             modelBuilder.Entity<Product>()
                 .Property(e => e.name)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Product>()
-                .Property(e => e.status)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Product>()

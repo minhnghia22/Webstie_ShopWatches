@@ -12,6 +12,8 @@ namespace ShopWatches.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Product()
         {
+            Categories_Product = new HashSet<Categories_Product>();
+            Orders_Details = new HashSet<Orders_Details>();
             Pictures = new HashSet<Picture>();
         }
 
@@ -22,12 +24,7 @@ namespace ShopWatches.Models
         [StringLength(255)]
         public string name { get; set; }
 
-        public float? price { get; set; }
-
         public int? quantities { get; set; }
-
-        [StringLength(50)]
-        public string status { get; set; }
 
         [StringLength(10)]
         public string warrantyTime { get; set; }
@@ -40,6 +37,16 @@ namespace ShopWatches.Models
 
         [Column(TypeName = "text")]
         public string detail { get; set; }
+
+        public int? status { get; set; }
+
+        public float? price { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Categories_Product> Categories_Product { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Orders_Details> Orders_Details { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Picture> Pictures { get; set; }

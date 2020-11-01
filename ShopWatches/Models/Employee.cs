@@ -38,15 +38,12 @@ namespace ShopWatches.Models
         public string addressEmp { get; set; }
 
         [Column(TypeName = "date")]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime? birthdayEmp { get; set; }
 
         [StringLength(7)]
         public string genderEmp { get; set; }
 
         [Column(TypeName = "smalldatetime")]
-
-        
         public DateTime? created_at { get; set; }
 
         public virtual Role Role { get; set; }
