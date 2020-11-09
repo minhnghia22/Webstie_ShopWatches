@@ -1,4 +1,4 @@
-CREATE DATABASE WatchesShop
+CREATE DATABASE ShopWatches
 GO
 USE ShopWatches
 GO
