@@ -7,6 +7,7 @@ using System.Net;
 using System.Security.Cryptography;
 using System.Web;
 using System.Web.Mvc;
+using ShopWatches.Common;
 using ShopWatches.Library;
 using ShopWatches.Models;
 
@@ -16,6 +17,8 @@ namespace ShopWatches.Areas.Admin.Controllers
     {
         private ShopWatchesDbContext db = new ShopWatchesDbContext();
 
+
+        [CustomAuthorizeAttribute(Role = "Admin")]
         // GET: Admin/Employees
         public ActionResult Index()
         {

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using ShopWatches.Common;
 using ShopWatches.Library;
 using ShopWatches.Models;
 
@@ -16,6 +17,8 @@ namespace ShopWatches.Areas.Admin.Controllers
         private ShopWatchesDbContext db = new ShopWatchesDbContext();
 
         // GET: Admin/Suppliers
+
+        [CustomAuthorizeAttribute(Role = "Admin")]
         public ActionResult Index()
         {
             return View(db.Suppliers.ToList());

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using ShopWatches.Common;
 using ShopWatches.Library;
 using ShopWatches.Models;
 
@@ -14,12 +15,17 @@ namespace ShopWatches.Areas.Admin.Controllers
 {
     public class ProductsController : Controller
     {
+
         private ShopWatchesDbContext db = new ShopWatchesDbContext();
 
+
         // GET: Admin/Products
+
+        [CustomAuthorizeAttribute(Role = "Admin")]
         public ActionResult Index()
         {
             var products = db.Products.Include(p => p.Supplier);
+           
             return View(products.ToList());
         }
 
