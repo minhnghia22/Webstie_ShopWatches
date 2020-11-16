@@ -11,7 +11,7 @@ GO
 	CREATE TABLE Suppliers(
 	IDSup int IDENTITY(1,1) PRIMARY KEY,
 	nameSup varchar(50),
-	phoneSup varchar(50),
+	phoneSup varchar(15),
 	emailSup varchar(150),
 	addressSup text,
 	);
@@ -50,7 +50,7 @@ GO
 	IDCtm int IDENTITY(1,1) PRIMARY KEY,
 	emailCtm varchar(150),
 	passwordCtm varchar(32),
-	nameCtm varchar(50),
+	nameCtm varchar(70),
 	phoneCtm varchar(15),
 	addressCtm text,
 	birthdayCtm date,
@@ -102,9 +102,18 @@ GO
 	GO
 	CREATE TABLE Voucher(
 	ID int IDENTITY(1,1) PRIMARY KEY,
-	code varchar(15),
+	code varchar(100),
 	status varchar(10),
 	exprityDate date,
 	value float(10)
+	);
+	GO
+	CREATE TABLE Cart(
+	ID int IDENTITY(1,1) PRIMARY KEY,
+	ProductID int,
+	customerID int,
+	quantities int,
+	FOREIGN KEY(ProductID) REFERENCES Product(ID),
+	FOREIGN KEY(customerID) REFERENCES Customer(IDCtm),
 	);
 	GO
