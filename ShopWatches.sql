@@ -54,7 +54,7 @@ GO
 	phoneCtm varchar(15),
 	addressCtm text,
 	birthdayCtm date,
-	genderCtm varchar(5),
+	genderCtm varchar(7),
 	created_at smalldatetime
 	);
 	GO
@@ -74,7 +74,7 @@ GO
 	IDcard int,
 	addressEmp text,
 	birthdayEmp date,
-	genderEmp varchar(5),
+	genderEmp varchar(7),
 	created_at smalldatetime,
 	FOREIGN KEY(roleID) REFERENCES Role(ID)
 	);
@@ -83,7 +83,7 @@ GO
 	ID int IDENTITY(1,1) PRIMARY KEY,
 	employeeID int,
 	customerID int,
-	requested time,
+	requested date,
 	totalMoney float(15),
 	statusOrder varchar(25),
 	statusPayment varchar(25),
