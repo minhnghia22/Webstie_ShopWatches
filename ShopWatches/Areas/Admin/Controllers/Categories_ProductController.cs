@@ -6,19 +6,14 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using ShopWatches.Common;
 using ShopWatches.Models;
 
 namespace ShopWatches.Areas.Admin.Controllers
 {
-   
     public class Categories_ProductController : Controller
     {
         private ShopWatchesDbContext db = new ShopWatchesDbContext();
 
-
-
-        [CustomAuthorizeAttribute(Role = "Admin")]
         // GET: Admin/Categories_Product
         public ActionResult Index()
         {
@@ -54,7 +49,7 @@ namespace ShopWatches.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Categories_Product categories_Product)
+        public ActionResult Create([Bind(Include = "ID,CategoriesID,ProductID")] Categories_Product categories_Product)
         {
             if (ModelState.IsValid)
             {
@@ -90,7 +85,7 @@ namespace ShopWatches.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Categories_Product categories_Product)
+        public ActionResult Edit([Bind(Include = "ID,CategoriesID,ProductID")] Categories_Product categories_Product)
         {
             if (ModelState.IsValid)
             {

@@ -11,11 +11,10 @@ namespace ShopWatches.Models
     {
         public int ID { get; set; }
 
-        [StringLength(15)]
+        [StringLength(100)]
         public string code { get; set; }
 
-        [StringLength(10)]
-        public string status { get; set; }
+        public int? status { get; set; }
 
         [Column(TypeName = "date")]
         public DateTime? exprityDate { get; set; }

@@ -1,0 +1,298 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="WatchesShopModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'WatchesShop.dbo.Cart' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Cart">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="ProductID" Type="int" />
+    <Property Name="NameProduct" Type="nvarchar" MaxLength="50" />
+    <Property Name="Amount" Type="int" />
+  </EntityType>
+  <EntityType Name="Categories">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" />
+    <Property Name="descrption" Type="text" />
+  </EntityType>
+  <EntityType Name="Categories_Product">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CategoriesID" Type="int" />
+    <Property Name="ProductID" Type="int" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="IDCtm" />
+    </Key>
+    <Property Name="IDCtm" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="emailCtm" Type="varchar" MaxLength="150" />
+    <Property Name="passwordCtm" Type="varchar" MaxLength="32" />
+    <Property Name="nameCtm" Type="varchar" MaxLength="50" />
+    <Property Name="phoneCtm" Type="varchar" MaxLength="15" />
+    <Property Name="addressCtm" Type="text" />
+    <Property Name="birthdayCtm" Type="date" />
+    <Property Name="genderCtm" Type="varchar" MaxLength="5" />
+    <Property Name="created_at" Type="smalldatetime" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="IDEmp" />
+    </Key>
+    <Property Name="IDEmp" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="roleID" Type="int" />
+    <Property Name="emailEmp" Type="varchar" MaxLength="150" />
+    <Property Name="passwordEmp" Type="varchar" MaxLength="32" />
+    <Property Name="nameEmp" Type="varchar" MaxLength="50" />
+    <Property Name="phoneEmp" Type="varchar" MaxLength="15" />
+    <Property Name="IDcard" Type="int" />
+    <Property Name="addressEmp" Type="text" />
+    <Property Name="birthdayEmp" Type="date" />
+    <Property Name="genderEmp" Type="varchar" MaxLength="5" />
+    <Property Name="created_at" Type="smalldatetime" />
+  </EntityType>
+  <EntityType Name="Orders">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="employeeID" Type="int" />
+    <Property Name="customerID" Type="int" />
+    <Property Name="requested" Type="time" Precision="7" />
+    <Property Name="totalMoney" Type="real" />
+    <Property Name="statusOrder" Type="varchar" MaxLength="25" />
+    <Property Name="statusPayment" Type="varchar" MaxLength="25" />
+  </EntityType>
+  <EntityType Name="Orders_Details">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProductID" Type="int" />
+    <Property Name="OrderID" Type="int" />
+    <Property Name="price" Type="real" />
+    <Property Name="quantities" Type="int" />
+  </EntityType>
+  <EntityType Name="Picture">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="productID" Type="int" />
+    <Property Name="url" Type="varchar" MaxLength="255" />
+    <Property Name="name" Type="varchar" MaxLength="150" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SupplierID" Type="int" />
+    <Property Name="name" Type="varchar" MaxLength="255" />
+    <Property Name="price" Type="float" />
+    <Property Name="quantities" Type="int" />
+    <Property Name="status" Type="int" />
+    <Property Name="warrantyTime" Type="varchar" MaxLength="10" />
+    <Property Name="originName" Type="varchar" MaxLength="50" />
+    <Property Name="img" Type="varchar" MaxLength="255" />
+    <Property Name="detail" Type="text" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Suppliers">
+    <Key>
+      <PropertyRef Name="IDSup" />
+    </Key>
+    <Property Name="IDSup" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nameSup" Type="varchar" MaxLength="50" />
+    <Property Name="phoneSup" Type="varchar" MaxLength="50" />
+    <Property Name="emailSup" Type="varchar" MaxLength="150" />
+    <Property Name="addressSup" Type="text" />
+  </EntityType>
+  <EntityType Name="Voucher">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="code" Type="varchar" MaxLength="15" />
+    <Property Name="status" Type="varchar" MaxLength="10" />
+    <Property Name="exprityDate" Type="date" />
+    <Property Name="value" Type="real" />
+  </EntityType>
+  <Association Name="FK__Categorie__Categ__2E1BDC42">
+    <End Role="Categories" Type="Self.Categories" Multiplicity="0..1" />
+    <End Role="Categories_Product" Type="Self.Categories_Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categories">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Categories_Product">
+        <PropertyRef Name="CategoriesID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Categorie__Produ__2F10007B">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="Categories_Product" Type="Self.Categories_Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Categories_Product">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Employee__roleID__35BCFE0A">
+    <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+    <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="roleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Orders__customer__398D8EEE">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+    <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="IDCtm" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="customerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Orders__employee__38996AB5">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+    <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="IDEmp" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="employeeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Orders_De__Order__3D5E1FD2">
+    <End Role="Orders" Type="Self.Orders" Multiplicity="0..1" />
+    <End Role="Orders_Details" Type="Self.Orders_Details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Orders_Details">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Orders_De__Produ__3C69FB99">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="Orders_Details" Type="Self.Orders_Details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Orders_Details">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Picture__product__2B3F6F97">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="Picture" Type="Self.Picture" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Picture">
+        <PropertyRef Name="productID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Product__Supplie__286302EC">
+    <End Role="Suppliers" Type="Self.Suppliers" Multiplicity="0..1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Suppliers">
+        <PropertyRef Name="IDSup" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="SupplierID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="WatchesShopModelStoreContainer">
+    <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Categories_Product" EntityType="Self.Categories_Product" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Orders_Details" EntityType="Self.Orders_Details" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Picture" EntityType="Self.Picture" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Suppliers" EntityType="Self.Suppliers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Voucher" EntityType="Self.Voucher" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Cart" EntityType="Self.Cart" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Cart].[ID] AS [ID], 
+    [Cart].[ProductID] AS [ProductID], 
+    [Cart].[NameProduct] AS [NameProduct], 
+    [Cart].[Amount] AS [Amount]
+    FROM [dbo].[Cart] AS [Cart]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK__Categorie__Categ__2E1BDC42" Association="Self.FK__Categorie__Categ__2E1BDC42">
+      <End Role="Categories" EntitySet="Categories" />
+      <End Role="Categories_Product" EntitySet="Categories_Product" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Categorie__Produ__2F10007B" Association="Self.FK__Categorie__Produ__2F10007B">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="Categories_Product" EntitySet="Categories_Product" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Employee__roleID__35BCFE0A" Association="Self.FK__Employee__roleID__35BCFE0A">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="Employee" EntitySet="Employee" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Orders__customer__398D8EEE" Association="Self.FK__Orders__customer__398D8EEE">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Orders__employee__38996AB5" Association="Self.FK__Orders__employee__38996AB5">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Orders_De__Order__3D5E1FD2" Association="Self.FK__Orders_De__Order__3D5E1FD2">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="Orders_Details" EntitySet="Orders_Details" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Orders_De__Produ__3C69FB99" Association="Self.FK__Orders_De__Produ__3C69FB99">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="Orders_Details" EntitySet="Orders_Details" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Picture__product__2B3F6F97" Association="Self.FK__Picture__product__2B3F6F97">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="Picture" EntitySet="Picture" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Product__Supplie__286302EC" Association="Self.FK__Product__Supplie__286302EC">
+      <End Role="Suppliers" EntitySet="Suppliers" />
+      <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

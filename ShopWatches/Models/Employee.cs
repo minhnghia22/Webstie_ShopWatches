@@ -40,7 +40,7 @@ namespace ShopWatches.Models
         [Column(TypeName = "date")]
         public DateTime? birthdayEmp { get; set; }
 
-        [StringLength(7)]
+        [StringLength(5)]
         public string genderEmp { get; set; }
 
         [Column(TypeName = "smalldatetime")]

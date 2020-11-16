@@ -12,6 +12,7 @@ namespace ShopWatches.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Customer()
         {
+            Carts = new HashSet<Cart>();
             Orders = new HashSet<Order>();
         }
 
@@ -41,6 +42,9 @@ namespace ShopWatches.Models
 
         [Column(TypeName = "smalldatetime")]
         public DateTime? created_at { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Cart> Carts { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Orders { get; set; }

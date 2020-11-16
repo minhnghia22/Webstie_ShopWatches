@@ -1,0 +1,120 @@
+﻿
+@model IEnumerable<ShopWatches.Models.Product>
+
+@{
+    ViewBag.Title = "Cart";
+    Layout = "~/Views/Shared/_LayoutHomePage.cshtml";
+    
+}
+
+<main>
+
+    <section class="cart_area section_padding">
+        <div class="container">
+            <div class="cart_inner">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr class="text-center">
+                                <th scope="col" class="btn-danger text-white">Product</th>
+                                <th scope="col" class="btn-danger text-white ">Price</th>
+                                <th scope="col" class="btn-danger text-white ">Quantity</th>
+                                <th scope="col" class="btn-danger text-white ">Total</th>
+                                <th scope="col" class="btn-danger text-white ">Setting</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+
+                                    <div class="media">
+                                        <div class="d-flex">
+                                            <img src="~/assets/img/gallery/card1.png" alt="">
+                                        </div>
+                                        <div class="media-body">
+                                            <p>Minimalistic shop for multipurpose use</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <h5>$360.00</h5>
+                                </td>
+                                <td>
+                                    <div class="form-inline">
+                                        <div class="input-group ">
+                                            <div class="input-group-btn ">
+                                                <span id="down" class=" input-number-decrement btn-danger form-control" onclick=" down('1', price<%=c.getID()%>, amount<%=c.getID()%>, totalPrice<%=c.getID()%>)"><span class="ti-minus"></span></span>
+                                            </div>
+                                            <input class="input-number form-control" id="amount<%=c.getID()%>" type="text" value="1" name="amount<%=i%>" readonly="">
+
+                                            <div class="input-group-btn">
+                                                <span id="up" class="input-number-increment btn-primary form-control" onclick="up(<%=p.getAmount() %>, price<%=c.getID()%>, amount<%=c.getID()%>, totalPrice<%=c.getID()%>)"><span class="ti-plus"></span></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <input id="1" type="button" class="form-control btn-info text-white text-center" value="100 $"> 
+                                </td>
+                                <td>
+                                    <a href="cart.jsp?ID=<%=p.getProductID()%>&username=<%=cs.getUsername()%>" onclick="return confirm('Are you sure Delete??');"><h5 class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn">Remove</h5></a>
+                                </td>
+                            </tr>
+
+     
+                            <tr class="shipping_area">
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    <div class="shipping_box">
+                                        <h3>Total bill:</h3>
+                                        <input type="text" class="post_code text-right" id="test" name="txtTotal" value="<%= totalMoney%>" readonly="" />
+                                       
+                                    </div>
+
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="checkout_btn_inner float-right">
+                        <a class="btn_1" href="/Home/Menu">Continue Shopping</a>
+                        <a class="btn_1 checkout_btn_1" href="#">Proceed to checkout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        function up(max, price, amount, totalPrice) {
+            var gia = price.value;
+
+            if (amount.value >= parseInt(max)) {
+                amount.value = max;
+            } else {
+                amount.value = parseInt(amount.value) + 1;
+                var rs = (amount.value * gia);
+                document.getElementById('test').value = parseInt(document.getElementById("test").value) + parseInt(gia);
+                totalPrice.value = rs + '$';
+            }
+            return;
+
+        }
+        function down(min, price, amount, totalPrice) {
+            var gia = price.value;
+            if (amount.value <= parseInt(min)) {
+                amount.value = min;
+            } else {
+                amount.value = parseInt(amount.value) - 1;
+                totalPrice.value = (amount.value * gia) + ' $';
+                document.getElementById('test').value = parseInt(document.getElementById("test").value) - parseInt(gia);
+            }
+            return;
+        }
+
+    </script>
+    <!--================End Cart Area =================-->
+</main>
+

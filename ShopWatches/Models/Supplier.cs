@@ -20,7 +20,7 @@ namespace ShopWatches.Models
         [StringLength(50)]
         public string nameSup { get; set; }
 
-        [StringLength(50)]
+        [StringLength(15)]
         public string phoneSup { get; set; }
 
         [StringLength(150)]
