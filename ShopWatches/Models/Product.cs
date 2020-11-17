@@ -40,7 +40,7 @@ namespace ShopWatches.Models
 
         public int? status { get; set; }
 
-        public float? price { get; set; }
+        public double? price { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Categories_Product> Categories_Product { get; set; }
