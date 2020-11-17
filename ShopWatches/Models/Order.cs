@@ -20,7 +20,8 @@ namespace ShopWatches.Models
 
         public int? customerID { get; set; }
 
-        public TimeSpan? requested { get; set; }
+        [Column(TypeName = "date")]
+        public DateTime? requested { get; set; }
 
         public float? totalMoney { get; set; }
 

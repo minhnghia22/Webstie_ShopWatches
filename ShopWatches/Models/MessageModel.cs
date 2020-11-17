@@ -5,9 +5,9 @@ using System.Web;
 
 namespace ShopWatches.Models
 {
-    public  class MessageModel
+    public class MessageModel
     {
-        public  String msg { get; set; }
-        public  String msg_css { get; set; }
+        public String msg { get; set; }
+        public String msg_css { get; set; }
     }
 }

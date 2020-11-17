@@ -1,0 +1,116 @@
+﻿
+@model IEnumerable<ShopWatches.Models.Cart>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutHomePage.cshtml";
+    float totalBill = 0;
+
+}
+
+
+<main>
+
+    <section class="cart_area section_padding">
+        <div class="container">
+            <div class="cart_inner">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr class="text-center">
+                                <th scope="col" class="btn-danger text-white">Product</th>
+                                <th scope="col" class="btn-danger text-white ">Price</th>
+                                <th scope="col" class="btn-danger text-white ">Quantity</th>
+                                <th scope="col" class="btn-danger text-white ">Total</th>
+                                <th scope="col" class="btn-danger text-white ">Option</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+
+                                float intoMoney = (float)(item.quantities * item.Product.price);
+                                totalBill += (float)intoMoney;
+                           
+                                <tr>
+                                    <td>
+
+                                        <div class="media">
+                                            <div class="d-flex">
+                                                <img src="@item.Product.img" alt="">
+                                            </div>
+                                            <div class="media-body">
+
+                                                @Html.DisplayFor(modelItem => item.Product.name)
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <input type="button" class="btn-success text-white text-center" id="price@(item.ID)" value="@(item.Product.price) $" readonly="" />
+                                        </div>
+                                    </td>
+                                    <td>
+
+                                        <input type="number" name="id" value="@item.ID" hidden />
+                                        <input class="form-control text-center" type="number" name="quantity" value="@(item.quantities)" min="1" max="@(item.Product.quantities)" readonly />
+                                    </td>
+                                    <td>
+                                        <input type="button" class="btn-success text-white text-center" value="@(intoMoney) $" readonly="" />
+                                    </td>
+                                    <td>
+                                        <div class="checkout_btn_inner float-right">
+                                            <a class="btn-warning text-light" href="#">Update</a>
+                                            <a class="btn-danger checkout_btn_1" href="@Url.Action("Delete", "Carts", new { id = item.ID })" onclick="return confirm('Are you sure delete?')">Remove</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+
+                            <tr class="shipping_area">
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    @{
+                                        if (totalBill == 0)
+                                        {
+                                            <b class="text-left">List Cart Empty</b>
+
+                                        }
+                                        else
+                                        {
+                                            <div class="shipping_box">
+
+                                                <h3>Total bill:</h3>
+                                                <input type="text" class="post_code text-right" id="totalBill" name="txtTotal" value="@(totalBill) $" readonly="" />
+
+                                            </div>
+                                        }}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="checkout_btn_inner float-left">
+                        <a class="btn_1" href="/Home/Menu">Continue Shopping</a>
+                    </div>
+                    @{
+                        if (totalBill != 0)
+                        {
+                            <div class="checkout_btn_inner float-right">
+                                <a class="btn_1 checkout_btn_1" href="Carts/Checkout">Proceed to checkout</a>
+                            </div>
+
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--================End Cart Area =================-->
+</main>
+

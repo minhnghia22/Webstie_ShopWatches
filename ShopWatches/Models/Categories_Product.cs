@@ -8,11 +8,11 @@ namespace ShopWatches.Models
 
     public partial class Categories_Product
     {
+        public int ID { get; set; }
+
         public int? CategoriesID { get; set; }
 
         public int? ProductID { get; set; }
-
-        public int ID { get; set; }
 
         public virtual Category Category { get; set; }
 

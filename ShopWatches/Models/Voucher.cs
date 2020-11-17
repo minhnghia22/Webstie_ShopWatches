@@ -11,7 +11,7 @@ namespace ShopWatches.Models
     {
         public int ID { get; set; }
 
-        [StringLength(15)]
+        [StringLength(100)]
         public string code { get; set; }
 
         [StringLength(10)]

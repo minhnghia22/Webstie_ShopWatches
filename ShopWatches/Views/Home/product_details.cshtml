@@ -1,0 +1,91 @@
+﻿
+@model ShopWatches.Models.Product
+
+
+@{
+    ViewBag.Title = "product_details";
+    Layout = "~/Views/Shared/_LayoutHomePage.cshtml";
+   var listPic =ViewBag.listPic;
+
+}
+<main>
+ 
+    <!--================Single Product Area =================-->
+    <div class="product_image_area">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-12">
+                    <div class="product_img_slide owl-carousel owl-loaded owl-drag">
+                        <div class="owl-stage-outer">
+                            <div class="owl-stage" style="transform: translate3d(-3420px, 0px, 0px); transition: all 0.25s ease 0s; width: 7980px;">
+                                @foreach (var item in listPic)
+                                {
+
+                                    <div class="owl-item cloned">
+                                        <div class="single_product_img">
+                                            <img src="@item.url" alt="@item.name" class="img-fluid">
+                                        </div>
+                                    </div>
+
+
+                                }
+                            </div>
+                            </div>
+                        <div class="owl-nav">
+                            <button type="button" role="presentation" class="owl-prev"> <i class="ti-angle-left"></i> </button>
+                            <button type="button" role="presentation" class="owl-next">
+                                <i class="ti-angle-right"></i>
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+             
+                    <div class="col-lg-8">
+                        <div class="single_product_text text-left">
+                            <h3>
+                                @Html.DisplayFor(model => model.name)
+                            </h3>
+                            <p>
+
+                                <b> Supplier: </b> @Html.DisplayFor(model => model.Supplier.nameSup) <br />
+                                <b> Origin: </b> @Html.DisplayFor(model => model.originName)<br />
+                                <b> Warranty period: </b>@Html.DisplayFor(model => model.warrantyTime) Months<br />
+                                <b> Description: </b>@Html.DisplayFor(model => model.detail)<br />
+
+                            </p>
+                            <div class="card_area single_product_text text-center">
+                                <b> Price: </b> <p style="font-size: 30px">@Html.DisplayFor(model => model.price) $</p>
+
+                                <div class="add_to_cart">
+                                    <a href="/Carts/addtoCart/@Model.ID" class="btn_3">add to cart</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+
+            </div>
+        </div>
+    </div>
+    <!--================End Single Product Area =================-->
+    <!-- subscribe part here -->
+    <section class="subscribe_part section_padding">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="subscribe_part_content">
+                        <h2>Get promotions &amp; updates!</h2>
+                        <p>Seamlessly empower fully researched growth strategies and interoperable internal or “organic” sources credibly innovate granular internal .</p>
+                        <div class="subscribe_form">
+                            <input type="email" placeholder="Enter your mail">
+                            <a href="#" class="btn_1">Subscribe</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- subscribe part end -->
+</main>
+

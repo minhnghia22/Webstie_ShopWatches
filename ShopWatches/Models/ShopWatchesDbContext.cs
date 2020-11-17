@@ -12,6 +12,7 @@ namespace ShopWatches.Models
         {
         }
 
+        public virtual DbSet<Cart> Carts { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Categories_Product> Categories_Product { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
@@ -62,6 +63,11 @@ namespace ShopWatches.Models
             modelBuilder.Entity<Customer>()
                 .Property(e => e.genderCtm)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<Customer>()
+                .HasMany(e => e.Carts)
+                .WithOptional(e => e.Customer)
+                .HasForeignKey(e => e.customerID);
 
             modelBuilder.Entity<Customer>()
                 .HasMany(e => e.Orders)

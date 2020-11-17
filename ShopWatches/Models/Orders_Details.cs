@@ -8,6 +8,8 @@ namespace ShopWatches.Models
 
     public partial class Orders_Details
     {
+        public int ID { get; set; }
+
         public int? ProductID { get; set; }
 
         public int? OrderID { get; set; }
@@ -15,8 +17,6 @@ namespace ShopWatches.Models
         public float? price { get; set; }
 
         public int? quantities { get; set; }
-
-        public int ID { get; set; }
 
         public virtual Order Order { get; set; }
 
