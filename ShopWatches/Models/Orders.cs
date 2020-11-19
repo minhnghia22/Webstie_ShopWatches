@@ -6,10 +6,10 @@ namespace ShopWatches.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Order
+    public partial class Orders
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Order()
+        public Orders()
         {
             Orders_Details = new HashSet<Orders_Details>();
         }
@@ -20,9 +20,6 @@ namespace ShopWatches.Models
 
         public int? customerID { get; set; }
 
-        [Column(TypeName = "date")]
-        public DateTime? requested { get; set; }
-
         public float? totalMoney { get; set; }
 
         [StringLength(25)]
@@ -30,6 +27,10 @@ namespace ShopWatches.Models
 
         [StringLength(25)]
         public string statusPayment { get; set; }
+
+        public DateTime? requested { get; set; }
+
+        public int? discount { get; set; }
 
         public virtual Customer Customer { get; set; }
 

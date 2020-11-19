@@ -12,7 +12,7 @@ namespace ShopWatches.Controllers
     public class CategoryController : Controller
     {
         private ShopWatchesDbContext db = new ShopWatchesDbContext();
-        // GET: Category
+        // GET: Categories
         public ActionResult Index(int? id)
         {
             if (id == null)

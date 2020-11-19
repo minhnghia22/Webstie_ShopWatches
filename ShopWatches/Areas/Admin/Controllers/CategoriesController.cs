@@ -16,7 +16,7 @@ namespace ShopWatches.Areas.Admin.Controllers
     {
         private ShopWatchesDbContext db = new ShopWatchesDbContext();
 
-
+        
 
         [CustomAuthorizeAttribute(Role = "Admin")]
         // GET: Admin/Categories
@@ -37,10 +37,10 @@ namespace ShopWatches.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Category category)
+        public ActionResult Create(Categories category)
         {
             if(db.Categories.Where(c => c.name == category.name).Count() > 0) {
-                Message.set_flash("The Category already exists", "danger");
+                Message.set_flash("The Categories already exists", "danger");
                 return View(category);
             }
             if (ModelState.IsValid)
@@ -61,7 +61,7 @@ namespace ShopWatches.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = db.Categories.Find(id);
+            Categories category = db.Categories.Find(id);
             if (category == null)
             {
                 return HttpNotFound();
@@ -74,7 +74,7 @@ namespace ShopWatches.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Category category)
+        public ActionResult Edit(Categories category)
         {
             if (ModelState.IsValid)
             {
@@ -94,7 +94,7 @@ namespace ShopWatches.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = db.Categories.Find(id);
+            Categories category = db.Categories.Find(id);
             if (category == null)
             {
                 return HttpNotFound();

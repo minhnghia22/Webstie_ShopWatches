@@ -12,7 +12,7 @@ namespace ShopWatches.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Employee()
         {
-            Orders = new HashSet<Order>();
+            Orders = new HashSet<Orders>();
         }
 
         [Key]
@@ -49,6 +49,6 @@ namespace ShopWatches.Models
         public virtual Role Role { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<Orders> Orders { get; set; }
     }
 }

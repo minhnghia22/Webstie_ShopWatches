@@ -5,11 +5,11 @@
 @{
     ViewBag.Title = "product_details";
     Layout = "~/Views/Shared/_LayoutHomePage.cshtml";
-   var listPic =ViewBag.listPic;
+    var listPic = ViewBag.listPic;
 
 }
 <main>
- 
+
     <!--================Single Product Area =================-->
     <div class="product_image_area">
         <div class="container">
@@ -30,7 +30,7 @@
 
                                 }
                             </div>
-                            </div>
+                        </div>
                         <div class="owl-nav">
                             <button type="button" role="presentation" class="owl-prev"> <i class="ti-angle-left"></i> </button>
                             <button type="button" role="presentation" class="owl-next">
@@ -40,30 +40,30 @@
 
                     </div>
                 </div>
-             
-                    <div class="col-lg-8">
-                        <div class="single_product_text text-left">
-                            <h3>
-                                @Html.DisplayFor(model => model.name)
-                            </h3>
-                            <p>
 
-                                <b> Supplier: </b> @Html.DisplayFor(model => model.Supplier.nameSup) <br />
-                                <b> Origin: </b> @Html.DisplayFor(model => model.originName)<br />
-                                <b> Warranty period: </b>@Html.DisplayFor(model => model.warrantyTime) Months<br />
-                                <b> Description: </b>@Html.DisplayFor(model => model.detail)<br />
+                <div class="col-lg-8">
+                    <div class="single_product_text text-left">
+                        <h3>
+                            @Html.DisplayFor(model => model.name)
+                        </h3>
+                        <p>
 
-                            </p>
-                            <div class="card_area single_product_text text-center">
-                                <b> Price: </b> <p style="font-size: 30px">@Html.DisplayFor(model => model.price) $</p>
+                            <b> Suppliers: </b> @Html.DisplayFor(model => model.Suppliers.nameSup) <br />
+                            <b> Origin: </b> @Html.DisplayFor(model => model.originName)<br />
+                            <b> Warranty period: </b>@Html.DisplayFor(model => model.warrantyTime) Months<br />
+                            <b> Description: </b>@Html.DisplayFor(model => model.detail)<br />
 
-                                <div class="add_to_cart">
-                                    <a href="/Carts/addtoCart/@Model.ID" class="btn_3">add to cart</a>
-                                </div>
+                        </p>
+                        <div class="card_area single_product_text text-center">
+                            <b> Price: </b> <p style="font-size: 30px">@Html.DisplayFor(model => model.price) $</p>
+
+                            <div class="add_to_cart">
+                                <a href="/Carts/addtoCart/@Model.ID" class="btn_3">add to cart</a>
                             </div>
                         </div>
                     </div>
-                
+                </div>
+
 
             </div>
         </div>

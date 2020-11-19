@@ -386,6 +386,8 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Areas\Admin\Views\Auth\login.cshtml" />
+    <Content Include="Areas\Admin\Views\Dashboard\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -404,8 +406,10 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AuthController.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoriesController.cs" />
     <Compile Include="Areas\Admin\Controllers\Categories_ProductController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Admin\Controllers\EmployeesController.cs" />
     <Compile Include="Areas\Admin\Controllers\PicturesController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductsController.cs" />
@@ -415,24 +419,26 @@
     <Compile Include="Controllers\CartsController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Library\Message.cs" />
     <Compile Include="Library\Mystring.cs" />
     <Compile Include="Models\Cart.cs" />
+    <Compile Include="Models\Categories.cs" />
     <Compile Include="Models\Categories_Product.cs" />
-    <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\MessageModel.cs" />
-    <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\Orders.cs" />
     <Compile Include="Models\Orders_Details.cs" />
     <Compile Include="Models\Picture.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Role.cs" />
+    <Compile Include="Models\SearchPriceModel.cs" />
     <Compile Include="Models\ShopWatchesDbContext.cs" />
-    <Compile Include="Models\Supplier.cs" />
+    <Compile Include="Models\Suppliers.cs" />
     <Compile Include="Models\Voucher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -572,6 +578,9 @@
     <Content Include="Views\Home\product_details.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Orders\Details.cshtml" />
+    <Content Include="Views\Orders\Index.cshtml" />
+    <Content Include="Views\Home\Search.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

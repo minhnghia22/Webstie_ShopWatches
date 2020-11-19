@@ -18,7 +18,7 @@ namespace ShopWatches.Models
 
         public int? quantities { get; set; }
 
-        public virtual Order Order { get; set; }
+        public virtual Orders Orders { get; set; }
 
         public virtual Product Product { get; set; }
     }

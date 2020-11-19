@@ -35,11 +35,11 @@ namespace ShopWatches.Controllers
             {
                 using(ShopWatchesDbContext db = new ShopWatchesDbContext())
                 {
-                    if(db.Customers.Any(x => x.emailCtm == cs.emailCtm))
+                    if(db.Customer.Any(x => x.emailCtm == cs.emailCtm))
                     {
                         ModelState.AddModelError("", "Email already exist.");
                         return View("Register", cs);
-                    }else if(db.Customers.Any(x => x.phoneCtm == cs.phoneCtm))
+                    }else if(db.Customer.Any(x => x.phoneCtm == cs.phoneCtm))
                     {
                         ModelState.AddModelError("", "Number phone already exist.");
                         return View("Register", cs);
@@ -47,7 +47,8 @@ namespace ShopWatches.Controllers
                     else
                     {
                         cs.passwordCtm = EncryptMD5Password(cs.passwordCtm);
-                        db.Customers.Add(cs);
+                        cs.created_at = DateTime.Today;
+                        db.Customer.Add(cs);
                         db.SaveChanges();
                     }
                     
@@ -60,33 +61,39 @@ namespace ShopWatches.Controllers
         // Update profile
         public ActionResult Update()
         {
-            return View();
+            if (Session["customerLogin"] == null)
+            {
+                return RedirectToAction("../Home/Index");
+            }
+            Customer cs = (Customer) Session["customerLogin"];
+            return View(cs);
         }
 
         [HttpPost]
-        public ActionResult Update(int id)
+        public ActionResult Update(Customer cs)
         {
 
+            Customer cusLogin = (Customer)Session["customerLogin"];
+            cs.passwordCtm = cusLogin.passwordCtm;
 
-            Customer cs = new Customer();
             if (ModelState.IsValid)
             {
                 using (ShopWatchesDbContext db = new ShopWatchesDbContext())
                 {
 
-                    if (db.Customers.Any(x => x.phoneCtm == cs.phoneCtm))
-                    {
-                        ModelState.AddModelError("", "Number phone already exist.");
-                        return View("Update", cs);
-                    }
-                    else
-                    {
-                        cs.passwordCtm = EncryptMD5Password(cs.passwordCtm);
-                        var item = db.Customers.Where(x => x.IDCtm == id).First();
+                    //if (db.Customers.Any(x => x.phoneCtm == cs.phoneCtm))
+                    //{
+                    //    ModelState.AddModelError("", "Number phone already exist.");
+                    //    return View("Update", cs);
+                    //}
+                    //else
+                    //{
+                        db.Entry(cs).State = EntityState.Modified;
                         db.SaveChanges();
-                        return View(item);
+                        ModelState.AddModelError("", "Updated successful.");
+                        return View(cs);
 
-                    }
+                  //  }
 
                 }
 
@@ -107,12 +114,12 @@ namespace ShopWatches.Controllers
 
 
         [HttpPost]
-        public ActionResult Login(Customer cs)
+        public ActionResult Login(String emailCtm, string passwordCtm)
         {
             using(ShopWatchesDbContext db = new ShopWatchesDbContext())
             {
-                cs.passwordCtm = EncryptMD5Password(cs.passwordCtm);
-                var user = db.Customers.SingleOrDefault(u => u.emailCtm == cs.emailCtm && u.passwordCtm == cs.passwordCtm);
+                passwordCtm = EncryptMD5Password(passwordCtm);
+                var user = db.Customer.SingleOrDefault(u => u.emailCtm == emailCtm && u.passwordCtm == passwordCtm);
                 if(user != null)
                 {
                     Session["customerLogin"] = user;
@@ -120,7 +127,7 @@ namespace ShopWatches.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Username or Password is wrong.");
+                    ViewBag.mess = "Username or Password is wrong.";
                 }
             }
             return View();

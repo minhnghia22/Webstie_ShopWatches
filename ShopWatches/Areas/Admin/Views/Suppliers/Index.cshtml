@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ShopWatches.Models.Supplier>
+﻿@model IEnumerable<ShopWatches.Models.Suppliers>
 
 @{
     ViewBag.Title = "Index";
@@ -21,7 +21,7 @@
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
                             <li><a href="#">Admin</a></li>
-                            <li><a href="#">Supplier</a></li>
+                            <li><a href="#">Suppliers</a></li>
                             <li class="active">List</li>
                         </ol>
                     </div>
@@ -38,9 +38,9 @@
                 @Html.Partial("_MessgeAlert")
                 <div class="card">
                     <div class="card-header">
-                        <strong class="card-title">Supplier Management</strong>
+                        <strong class="card-title">Suppliers Management</strong>
                         <div style="float: right">
-                            @Html.ActionLink("Add Supplier", "Create")
+                            @Html.ActionLink("Add Suppliers", "Create")
                         </div>
                     </div>
                     <div class="card-body">

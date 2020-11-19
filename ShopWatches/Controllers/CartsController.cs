@@ -14,7 +14,7 @@ namespace ShopWatches.Controllers
     {
         private ShopWatchesDbContext db = new ShopWatchesDbContext();
        
-        // GET: Carts
+        // GET: Cart
         public ActionResult Index()
         {
 
@@ -23,8 +23,8 @@ namespace ShopWatches.Controllers
                 return RedirectToAction("../Home/Index");
             }
             Customer cus = (Customer)Session["customerLogin"];
-            var carts = db.Carts.Include(c => c.Customer).Include(c => c.Product).Where(c => c.customerID == cus.IDCtm );
-            return View(carts.ToList());
+            var Cart = db.Cart.Include(c => c.Customer).Include(c => c.Product).Where(c => c.customerID == cus.IDCtm ).OrderByDescending(c => c.ID); ;
+            return View(Cart.ToList());
         }
 
         public ActionResult Delete(int? id)
@@ -33,33 +33,29 @@ namespace ShopWatches.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Cart c = db.Carts.Find(id);
+            Cart c = db.Cart.Find(id);
             if (c == null)
             {
                 return HttpNotFound();
             }
-            db.Carts.Remove(c);
+            db.Cart.Remove(c);
             db.SaveChanges();          
             return RedirectToAction("Index");
         }
-        //[HttpPost]
-        //public ActionResult Edit(int? id, int? quantity)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    Cart c = db.Carts.Find(id);
-        //    if (c == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    c.quantities = quantity;
-        //    db.Entry(c).State = EntityState.Modified;
-        //   // db.Carts.Remove(c);
-        //    db.SaveChanges();
-        //    return RedirectToAction("Index");
-        //}
+        [HttpPost]
+        public ActionResult UpdateCart(FormCollection fc)
+        {
+            Customer cus = (Customer)Session["customerLogin"];
+            string[] quantitys = fc.GetValues("quantity");
+            var Cart = db.Cart.Where(c => c.customerID == cus.IDCtm).ToList();
+            for (int i = 0; i < Cart.Count(); i++)
+            {
+                Cart[i].quantities = Convert.ToInt32(quantitys[i]);
+                db.Entry(Cart[i]).State = EntityState.Modified;
+            }
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
 
         public ActionResult addtoCart(int? id)
         {
@@ -72,7 +68,7 @@ namespace ShopWatches.Controllers
                 return RedirectToAction("../Account/Login");
             }
             Customer c = (Customer)Session["customerLogin"];
-            if(db.Carts.Where(x => x.customerID == c.IDCtm && x.ProductID == id).Count() > 0)
+            if(db.Cart.Where(x => x.customerID == c.IDCtm && x.ProductID == id).Count() > 0)
             {
                 return RedirectToAction("Index");
             }
@@ -80,7 +76,7 @@ namespace ShopWatches.Controllers
             ct.customerID = c.IDCtm;
             ct.ProductID = id;
             ct.quantities = 1;
-            db.Carts.Add(ct);
+            db.Cart.Add(ct);
             
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -103,7 +99,7 @@ namespace ShopWatches.Controllers
                 return RedirectToAction("../Home/Index");
 
             }
-            Voucher v = db.Vouchers.Where(x => x.code == code && x.status == "false").FirstOrDefault();
+            Voucher v = db.Voucher.Where(x => x.code == code && x.status == "false").FirstOrDefault();
             if(v != null)
             {
                 Session["voucher"] = v;
@@ -129,44 +125,51 @@ namespace ShopWatches.Controllers
             float total = 0;
             Customer cus = (Customer)Session["customerLogin"];
             Voucher v = (Voucher) Session["voucher"];
-            var carts = db.Carts.Include(c => c.Customer).Include(c => c.Product).Where(c => c.customerID == cus.IDCtm).ToList();
-            foreach (var item in carts)
+            var Cart = db.Cart.Include(c => c.Customer).Include(c => c.Product).Where(c => c.customerID == cus.IDCtm).ToList();
+            foreach (var item in Cart)
             {
                 total += (float)(item.quantities * item.Product.price);
             }
             
             //insert order
-            Order o = new Order();
+            Orders o = new Orders();
             o.customerID = cus.IDCtm;
             o.employeeID = 1;
-            o.requested = DateTime.Today;
-            if(v != null) { 
+            o.requested = DateTime.Now;
+            o.discount = 0;
+            if (v != null) { 
             o.totalMoney = total - v.value;
+            o.discount = (int?)v.value;
             }
             else
             {
                 o.totalMoney = total;
             }
-            o.statusPayment = "false";
-            o.statusOrder = "wait";
+            o.statusPayment = "Paymented";
+            o.statusOrder = "Pending";
             db.Orders.Add(o);
             db.SaveChanges();
             //insert order details
             int ido = db.Orders.Max(x => x.ID);
-            foreach (var item in carts)
+            foreach (var item in Cart)
             {
                 Orders_Details od = new Orders_Details();
                 od.OrderID = ido;
                 od.ProductID = item.ProductID;
                 od.price = (float?)item.Product.price;
                 od.quantities = item.quantities;
+                //xu ly tru số lượng của sản phẩm sau khi bán ra
+                Product p = db.Product.Find(item.ProductID);
+                p.quantities -= item.quantities;
+                //thay doi
+                db.Entry(p).State = EntityState.Modified; 
                 db.Orders_Details.Add(od);
             }
             db.SaveChanges();
-           // Delete Carts
-            foreach (var item in carts)
+           // Delete Cart
+            foreach (var item in Cart)
             {
-                db.Carts.Remove(item);
+                db.Cart.Remove(item);
             }
             Session["voucher"] = null;
             db.SaveChanges();

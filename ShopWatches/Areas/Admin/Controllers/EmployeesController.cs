@@ -22,7 +22,7 @@ namespace ShopWatches.Areas.Admin.Controllers
         // GET: Admin/Employees
         public ActionResult Index()
         {
-            var employees = db.Employees.Include(e => e.Role);
+            var employees = db.Employee.Include(e => e.Role);
             return View(employees.ToList());
         }
 
@@ -31,7 +31,7 @@ namespace ShopWatches.Areas.Admin.Controllers
         // GET: Admin/Employees/Create
         public ActionResult Create()
         {
-            ViewBag.roleID = new SelectList(db.Roles, "ID", "name");
+            ViewBag.roleID = new SelectList(db.Role, "ID", "name");
             return View();
         }
 
@@ -42,18 +42,18 @@ namespace ShopWatches.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Employee employee)
         {
-            ViewBag.roleID = new SelectList(db.Roles, "ID", "name");
-            if (db.Employees.Where(emp => emp.emailEmp == employee.emailEmp).Count() > 0)
+            ViewBag.roleID = new SelectList(db.Role, "ID", "name");
+            if (db.Employee.Where(emp => emp.emailEmp == employee.emailEmp).Count() > 0)
             {
                 Message.set_flash("The Email already exists", "danger");
                 return View(employee);
             }
-            if (db.Employees.Where(emp => emp.phoneEmp == employee.phoneEmp).Count() > 0)
+            if (db.Employee.Where(emp => emp.phoneEmp == employee.phoneEmp).Count() > 0)
             {
                 Message.set_flash("The phone number already exists", "danger");
                 return View(employee);
             }
-            if (db.Employees.Where(emp => emp.IDcard == employee.IDcard).Count() > 0)
+            if (db.Employee.Where(emp => emp.IDcard == employee.IDcard).Count() > 0)
             {
                 Message.set_flash("The ID Card already exists", "danger");
                 return View(employee);
@@ -62,13 +62,13 @@ namespace ShopWatches.Areas.Admin.Controllers
             {
                 employee.created_at = DateTime.Now;
                 employee.passwordEmp = Mystring.ToMD5(employee.passwordEmp);
-                db.Employees.Add(employee);
+                db.Employee.Add(employee);
                 db.SaveChanges();
                 Message.set_flash("Add successed", "success");
                 return RedirectToAction("Index");
             }
 
-            ViewBag.roleID = new SelectList(db.Roles, "ID", "name", employee.roleID);
+            ViewBag.roleID = new SelectList(db.Role, "ID", "name", employee.roleID);
             Message.set_flash("Add failed", "danger");
             return View(employee);
         }
@@ -80,12 +80,12 @@ namespace ShopWatches.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Employee employee = db.Employees.Find(id);
+            Employee employee = db.Employee.Find(id);
             if (employee == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.roleID = new SelectList(db.Roles, "ID", "name", employee.roleID);
+            ViewBag.roleID = new SelectList(db.Role, "ID", "name", employee.roleID);
             return View(employee);
         }
 
@@ -97,7 +97,7 @@ namespace ShopWatches.Areas.Admin.Controllers
         public ActionResult Edit(Employee employee)
         {
        
-            ViewBag.roleID = new SelectList(db.Roles, "ID", "name");
+            ViewBag.roleID = new SelectList(db.Role, "ID", "name");
             if (ModelState.IsValid)
             {
                 db.Entry(employee).State = EntityState.Modified;
@@ -116,13 +116,13 @@ namespace ShopWatches.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Employee employee = db.Employees.Find(id);
+            Employee employee = db.Employee.Find(id);
             if (employee == null)
             {
                 return HttpNotFound();
             }
             
-            db.Employees.Remove(employee);
+            db.Employee.Remove(employee);
             db.SaveChanges();
             Message.set_flash("Delete successed", "success");
             return RedirectToAction("Index");

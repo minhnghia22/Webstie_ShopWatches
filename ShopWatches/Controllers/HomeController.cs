@@ -17,40 +17,39 @@ namespace ShopWatches.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            var products = db.Products.Include(p => p.Supplier);
-            return View(products.ToList());
+            var products = db.Product.Where(p=> p.quantities > 1).OrderByDescending(p => p.ID);
+            return View(products.ToList());        
         }
-
+        
         public ActionResult Menu()
         {
-            var products = db.Products.Include(p => p.Supplier);
+            var products = db.Product.Include(p => p.Suppliers).Where(p => p.quantities > 1).OrderByDescending(p => p.ID);
             ViewBag.Cate= db.Categories.ToList();
             return View(products.ToList());
         }
 
         public ActionResult About()
         {
-            var products = db.Products.Include(p => p.Supplier);
-            return View(products.ToList());
+           
+            return View();
         }
 
         public ActionResult Login()
         {
-            var products = db.Products.Include(p => p.Supplier);
-            return View(products.ToList());
+           
+            return View();
         }
-
-        public ActionResult Cart()
-        {
-            var products = db.Products.Include(p => p.Supplier);
-            return View(products.ToList());
-        }
-
         public ActionResult Register()
         {
-            var products = db.Products.Include(p => p.Supplier);
+            return View();
+        }
+        public ActionResult Cart()
+        {
+            var products = db.Product.Include(p => p.Suppliers);
             return View(products.ToList());
         }
+
+
         // GET: Home/Details/5
         public ActionResult product_details(int? id)
         {
@@ -58,8 +57,8 @@ namespace ShopWatches.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
-            var allPicture = db.Pictures.Where(pic => pic.productID == id);
+            Product product = db.Product.Find(id);
+            var allPicture = db.Picture.Where(pic => pic.productID == id);
             if (product == null)
             {
                 return HttpNotFound();
@@ -67,72 +66,19 @@ namespace ShopWatches.Controllers
             ViewBag.listPic = allPicture;
             return View(product);
         }
-
-        
-
-        // GET: Home/Create
-        public ActionResult Create()
+        [HttpGet]
+        public ActionResult search(string name)
         {
-            ViewBag.SupplierID = new SelectList(db.Suppliers, "IDSup", "nameSup");
-            return View();
+            var product = db.Product.Where(p => p.name.Contains(name)).ToList();
+            return View(product);
         }
 
-        // POST: Home/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,SupplierID,name,quantities,warrantyTime,originName,img,detail,status,price")] Product product)
+        public ActionResult searchs(int price1, int price2)
         {
-            if (ModelState.IsValid)
-            {
-                db.Products.Add(product);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.SupplierID = new SelectList(db.Suppliers, "IDSup", "nameSup", product.SupplierID);
+            var product = db.Product.Where(p => p.price >= price1 && p.price <= price2).ToList();
             return View(product);
         }
-
-        // GET: Home/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Product product = db.Products.Find(id);
-            if (product == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.SupplierID = new SelectList(db.Suppliers, "IDSup", "nameSup", product.SupplierID);
-            return View(product);
-        }
-
-        // POST: Home/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,SupplierID,name,quantities,warrantyTime,originName,img,detail,status,price")] Product product)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(product).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.SupplierID = new SelectList(db.Suppliers, "IDSup", "nameSup", product.SupplierID);
-            return View(product);
-        }
-
-
-
-
-
-
 
         protected override void Dispose(bool disposing)
         {

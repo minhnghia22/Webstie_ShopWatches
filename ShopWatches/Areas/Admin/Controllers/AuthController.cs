@@ -30,13 +30,13 @@ namespace ShopWatches.Areas.Admin.Controllers
             {
                 String Email = email;
                 string Pass = Mystring.ToMD5(password);
-                var userC = db.Employees.Where(m => m.emailEmp == Email && m.passwordEmp == Pass);
+                var userC = db.Employee.Where(m => m.emailEmp == Email && m.passwordEmp == Pass);
                 if (userC.Count() == 0)
                 {
                     ViewBag.error = "Email or Password Incorrect";
                     return View();
                 }
-                userC = db.Employees.Where(m => m.emailEmp == Email && m.passwordEmp == Pass && m.Role.name == "Admin");
+                userC = db.Employee.Where(m => m.emailEmp == Email && m.passwordEmp == Pass && m.Role.name == "Admin");
                 if (userC.Count() == 0)
                 {
                     ViewBag.error = "You do not have permission to login";

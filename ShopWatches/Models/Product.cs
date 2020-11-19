@@ -55,6 +55,6 @@ namespace ShopWatches.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Picture> Pictures { get; set; }
 
-        public virtual Supplier Supplier { get; set; }
+        public virtual Suppliers Suppliers { get; set; }
     }
 }

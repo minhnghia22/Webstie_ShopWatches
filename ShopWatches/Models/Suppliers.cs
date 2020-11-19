@@ -6,12 +6,12 @@ namespace ShopWatches.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Supplier
+    public partial class Suppliers
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Supplier()
+        public Suppliers()
         {
-            Products = new HashSet<Product>();
+            Product = new HashSet<Product>();
         }
 
         [Key]
@@ -30,6 +30,6 @@ namespace ShopWatches.Models
         public string addressSup { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Product> Products { get; set; }
+        public virtual ICollection<Product> Product { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model ShopWatches.Models.Supplier
+﻿@model ShopWatches.Models.Suppliers
 
 @{
     ViewBag.Title = "Edit";
@@ -20,7 +20,7 @@
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
                             <li><a href="#">Admin</a></li>
-                            <li><a href="#">Supplier</a></li>
+                            <li><a href="#">Suppliers</a></li>
                             <li class="active">Edit</li>
                         </ol>
                     </div>
@@ -44,14 +44,14 @@
                 @Html.Partial("_MessgeAlert")
                 <div class="card">
                     <div class="card-header">
-                        <b>Edit Supplier </b>
+                        <b>Edit Suppliers </b>
                         <div style="float: right">
                             @Html.ActionLink("Back to List", "Index")
                         </div>
                     </div>
                     <div class="card-body card-block">
                         <div class="form-group">
-                            <label class=" form-control-label">Name Supplier</label>
+                            <label class=" form-control-label">Name Suppliers</label>
                             <div class="input-group">
                                 <div class="input-group-addon"><i class="fa fa-user"></i></div>
                                @Html.EditorFor(model => model.nameSup, new { htmlAttributes = new { @class = "form-control" } })
