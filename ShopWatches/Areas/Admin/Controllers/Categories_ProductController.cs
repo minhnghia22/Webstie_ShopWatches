@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using ShopWatches.Common;
 using ShopWatches.Models;
 
 namespace ShopWatches.Areas.Admin.Controllers
@@ -13,11 +14,11 @@ namespace ShopWatches.Areas.Admin.Controllers
     public class Categories_ProductController : Controller
     {
         private ShopWatchesDbContext db = new ShopWatchesDbContext();
-
+        [CustomAuthorizeAttribute(Role = "Admin")]
         // GET: Admin/Categories_Product
         public ActionResult Index()
         {
-            var categories_Product = db.Categories_Product.Include(c => c.Category).Include(c => c.Product);
+            var categories_Product = db.Categories_Product.Include(c => c.Categories).Include(c => c.Product);
             return View(categories_Product.ToList());
         }
 
@@ -40,7 +41,7 @@ namespace ShopWatches.Areas.Admin.Controllers
         public ActionResult Create()
         {
             ViewBag.CategoriesID = new SelectList(db.Categories, "ID", "name");
-            ViewBag.ProductID = new SelectList(db.Products, "ID", "name");
+            ViewBag.ProductID = new SelectList(db.Product, "ID", "name");
             return View();
         }
 
@@ -59,7 +60,7 @@ namespace ShopWatches.Areas.Admin.Controllers
             }
 
             ViewBag.CategoriesID = new SelectList(db.Categories, "ID", "name", categories_Product.CategoriesID);
-            ViewBag.ProductID = new SelectList(db.Products, "ID", "name", categories_Product.ProductID);
+            ViewBag.ProductID = new SelectList(db.Product, "ID", "name", categories_Product.ProductID);
             return View(categories_Product);
         }
 
@@ -76,7 +77,7 @@ namespace ShopWatches.Areas.Admin.Controllers
                 return HttpNotFound();
             }
             ViewBag.CategoriesID = new SelectList(db.Categories, "ID", "name", categories_Product.CategoriesID);
-            ViewBag.ProductID = new SelectList(db.Products, "ID", "name", categories_Product.ProductID);
+            ViewBag.ProductID = new SelectList(db.Product, "ID", "name", categories_Product.ProductID);
             return View(categories_Product);
         }
 
@@ -85,7 +86,7 @@ namespace ShopWatches.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,CategoriesID,ProductID")] Categories_Product categories_Product)
+        public ActionResult Edit(Categories_Product categories_Product)
         {
             if (ModelState.IsValid)
             {
@@ -94,7 +95,7 @@ namespace ShopWatches.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.CategoriesID = new SelectList(db.Categories, "ID", "name", categories_Product.CategoriesID);
-            ViewBag.ProductID = new SelectList(db.Products, "ID", "name", categories_Product.ProductID);
+            ViewBag.ProductID = new SelectList(db.Product, "ID", "name", categories_Product.ProductID);
             return View(categories_Product);
         }
 

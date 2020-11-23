@@ -14,7 +14,7 @@ namespace ShopWatches.Models
 
         public int? ProductID { get; set; }
 
-        public virtual Category Category { get; set; }
+        public virtual Categories Categories { get; set; }
 
         public virtual Product Product { get; set; }
     }

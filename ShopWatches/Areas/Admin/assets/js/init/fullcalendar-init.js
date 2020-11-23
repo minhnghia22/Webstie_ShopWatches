@@ -7,7 +7,7 @@
         this.$modal = $('#event-modal'),
         this.$event = ('#external-events div.external-event'),
         this.$calendar = $('#calendar'),
-        this.$saveCategoryBtn = $('.save-category'),
+        this.$saveCategoriesBtn = $('.save-category'),
         this.$categoryForm = $('#add-category form'),
         this.$extEvents = $('#external-events'),
         this.$calendarObj = null
@@ -66,7 +66,7 @@
             form.append("<div class='row'></div>");
             form.find(".row")
                 .append("<div class='col-md-6'><div class='form-group'><label class='control-label'>Event Name</label><input class='form-control' placeholder='Insert Event Name' type='text' name='title'/></div></div>")
-                .append("<div class='col-md-6'><div class='form-group'><label class='control-label'>Category</label><select class='form-control' name='category'></select></div></div>")
+                .append("<div class='col-md-6'><div class='form-group'><label class='control-label'>Categories</label><select class='form-control' name='category'></select></div></div>")
                 .find("select[name='category']")
                 .append("<option value='bg-danger'>Danger</option>")
                 .append("<option value='bg-success'>Success</option>")
@@ -170,7 +170,7 @@
         });
 
         //on new event
-        this.$saveCategoryBtn.on('click', function(){
+        this.$saveCategoriesBtn.on('click', function(){
             var categoryName = $this.$categoryForm.find("input[name='category-name']").val();
             var categoryColor = $this.$categoryForm.find("select[name='category-color']").val();
             if (categoryName !== null && categoryName.length != 0) {

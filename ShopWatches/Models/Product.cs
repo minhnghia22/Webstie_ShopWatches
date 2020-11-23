@@ -23,6 +23,7 @@ namespace ShopWatches.Models
         public int? SupplierID { get; set; }
 
         [StringLength(255)]
+
         public string name { get; set; }
 
         public double? price { get; set; }
@@ -55,6 +56,6 @@ namespace ShopWatches.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Picture> Pictures { get; set; }
 
-        public virtual Supplier Supplier { get; set; }
+        public virtual Suppliers Suppliers { get; set; }
     }
 }

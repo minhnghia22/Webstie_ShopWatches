@@ -1,0 +1,26 @@
+﻿@model IEnumerable<ShopWatches.Models.Cart>
+@{
+    ViewBag.Title = "BillPay";
+    Layout = "~/Views/Shared/_LayoutHomePage.cshtml";
+
+    ShopWatches.Models.Customer cus = (ShopWatches.Models.Customer)Session["customerLogin"];
+}
+
+<div class="container" style="padding-top: 10%">
+    <h2 class="text-center highlighted">Company ANDZ</h2>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <h3 class="fa-bold text-center">
+            Thanks you <b> @cus.nameCtm</b> <br/>
+            Your order has been saved
+        </h3>
+       
+    </div>
+    
+    <br />
+    <div class="checkout_btn_inner float-left">
+        <a class="btn_1" href="/Home/Menu">Continue Shopping</a>
+    </div>
+</div>
+
+
+

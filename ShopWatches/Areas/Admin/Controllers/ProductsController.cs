@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using ShopWatches.Common;
 using ShopWatches.Library;
 using ShopWatches.Models;
 
@@ -14,16 +15,21 @@ namespace ShopWatches.Areas.Admin.Controllers
 {
     public class ProductsController : Controller
     {
+
         private ShopWatchesDbContext db = new ShopWatchesDbContext();
 
-        // GET: Admin/Products
+
+        // GET: Admin/Product
+
+        [CustomAuthorizeAttribute(Role = "Admin")]
         public ActionResult Index()
         {
-            var products = db.Products.Include(p => p.Supplier);
+            var products = db.Product.Include(p => p.Suppliers);
+           
             return View(products.ToList());
         }
 
-        // GET: Admin/Products/Create
+        // GET: Admin/Product/Create
         public ActionResult Create()
         {
             ViewBag.SupplierID = new SelectList(db.Suppliers, "IDSup", "nameSup");
@@ -37,7 +43,7 @@ namespace ShopWatches.Areas.Admin.Controllers
         public ActionResult Create(Product product)
         {
             ViewBag.SupplierID = new SelectList(db.Suppliers, "IDSup", "nameSup");
-            var check = db.Products.Where(p => p.name == product.name && p.SupplierID == product.SupplierID).Count();
+            var check = db.Product.Where(p => p.name == product.name && p.SupplierID == product.SupplierID).Count();
             if(check > 0)
             {
                 Message.set_flash("The product already exists", "danger");
@@ -47,7 +53,7 @@ namespace ShopWatches.Areas.Admin.Controllers
             {
                 // lấy tên loại sản phẩm
                 product.name = product.name.Trim();
-                db.Products.Add(product);
+                db.Product.Add(product);
                 db.SaveChanges();
                 Message.set_flash("Add successed", "success");
                 return RedirectToAction("Index");
@@ -57,7 +63,7 @@ namespace ShopWatches.Areas.Admin.Controllers
             return View(product);
         }
 
-        // GET: Admin/Products/Edit/5
+        // GET: Admin/Product/Edit/5
         public ActionResult Edit(int? id)
         {
 
@@ -65,7 +71,7 @@ namespace ShopWatches.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
+            Product product = db.Product.Find(id);
             if (product == null)
             {
                 return HttpNotFound();
@@ -74,7 +80,7 @@ namespace ShopWatches.Areas.Admin.Controllers
             return View(product);
         }
 
-        // POST: Admin/Products/Edit/5
+        // POST: Admin/Product/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -94,24 +100,24 @@ namespace ShopWatches.Areas.Admin.Controllers
             return View(product);
         }
 
-        // GET: Admin/Products/Delete/5
+        // GET: Admin/Product/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
+            Product product = db.Product.Find(id);
             if (product == null)
             {
                 return HttpNotFound();
             }
-            var allPicture = db.Pictures.Where(pic => pic.productID == id);
+            var allPicture = db.Picture.Where(pic => pic.productID == id);
             foreach(var pic in allPicture)
             {
-                db.Pictures.Remove(pic);
+                db.Picture.Remove(pic);
             }
-            db.Products.Remove(product);
+            db.Product.Remove(product);
          
             db.SaveChanges();
             Message.set_flash("Delete successed", "success");

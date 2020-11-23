@@ -16,7 +16,7 @@ namespace ShopWatches.Models
         [StringLength(255)]
         public string url { get; set; }
 
-        [StringLength(255)]
+        [StringLength(150)]
         public string name { get; set; }
 
         public virtual Product Product { get; set; }

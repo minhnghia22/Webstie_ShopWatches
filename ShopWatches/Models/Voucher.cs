@@ -14,7 +14,8 @@ namespace ShopWatches.Models
         [StringLength(100)]
         public string code { get; set; }
 
-        public int? status { get; set; }
+        [StringLength(10)]
+        public string status { get; set; }
 
         [Column(TypeName = "date")]
         public DateTime? exprityDate { get; set; }

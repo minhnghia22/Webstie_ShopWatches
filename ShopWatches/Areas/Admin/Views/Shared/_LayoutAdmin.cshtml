@@ -8,7 +8,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Ela Admin - HTML5 Admin Template</title>
+    <title>Dashboard Admin</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -37,7 +37,7 @@
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li class="active">
-                        <a href="index.html"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
+                        <a href="/Admin"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
                     </li>
                     <li class="menu-title">Manager</li><!-- /.menu-title -->
                     <li class="menu-item-has-children dropdown">
@@ -52,23 +52,23 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-picture-o"></i>Image</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-th-list"></i><a href="/Admin/Pictures/">List Image</a></li>
-                            <li><i class="fa fa-plus"></i><a href="/Admin/Pictures/Create">Add Image</a></li>
+                            <li><i class="fa fa-plus"></i><a href="/Admin/Pictures/Create">Add Image to Product</a></li>
 
                         </ul>
                     </li>
                     <li class="menu-item-has-children dropdown" id="category">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-star"></i>Category</a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-star"></i>Categories</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="menu-icon fa fa-th-list"></i><a href="/admin/Categories/">List Category</a></li>
-                            <li><i class="menu-icon fa fa-plus"></i><a href="/admin/Categories/Create">Add Category</a></li>
+                            <li><i class="menu-icon fa fa-th-list"></i><a href="/admin/Categories/">List Categories</a></li>
+                            <li><i class="menu-icon fa fa-plus"></i><a href="/admin/Categories/Create">Add Categories</a></li>
 
                         </ul>
                     </li>
                     <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-star"></i>Supplier</a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-star"></i>Suppliers</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="menu-icon fa fa-th-list"></i><a href="/Admin/Suppliers">List Supplier</a></li>
-                            <li><i class="menu-icon fa fa-plus"></i><a href="/Admin/Suppliers/Create">Add Supplier</a></li>
+                            <li><i class="menu-icon fa fa-th-list"></i><a href="/Admin/Suppliers">List Suppliers</a></li>
+                            <li><i class="menu-icon fa fa-plus"></i><a href="/Admin/Suppliers/Create">Add Suppliers</a></li>
 
                         </ul>
                     </li>                   
@@ -110,8 +110,8 @@
         <header id="header" class="header">
             <div class="top-left">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="./"><img src="~/Areas/Admin/images/logo.png" alt="Logo"></a>
-                    <a class="navbar-brand hidden" href="./"><img src="~/Areas/Admin/images/logo2.png" alt="Logo"></a>
+                    <a class="navbar-brand" href="/Admin"><img src="~/Areas/Admin/images/logo.png" alt="Logo"></a>
+                    <a class="navbar-brand hidden" href="/Admin"><img src="~/Areas/Admin/images/logo2.png" alt="Logo"></a>
                     <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
                 </div>
             </div>
@@ -157,13 +157,7 @@
                         </a>
 
                         <div class="user-menu dropdown-menu">
-                            <a class="nav-link" href="#"><i class="fa fa-user"></i>My Profile</a>
-
-                            <a class="nav-link" href="#"><i class="fa fa-bell-o"></i>Notifications <span class="count">13</span></a>
-
-                            <a class="nav-link" href="#"><i class="fa fa-cog"></i>Settings</a>
-
-                            <a class="nav-link" href="#"><i class="fa fa-power-off"></i>Logout</a>
+                            <a class="nav-link" href="~/Admin/Auth/logout"><i class="fa fa-power-off"></i>Logout</a>
                         </div>
                     </div>
                 </div>

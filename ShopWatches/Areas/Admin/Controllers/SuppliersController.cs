@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using ShopWatches.Common;
 using ShopWatches.Library;
 using ShopWatches.Models;
 
@@ -16,6 +17,8 @@ namespace ShopWatches.Areas.Admin.Controllers
         private ShopWatchesDbContext db = new ShopWatchesDbContext();
 
         // GET: Admin/Suppliers
+
+        [CustomAuthorizeAttribute(Role = "Admin")]
         public ActionResult Index()
         {
             return View(db.Suppliers.ToList());
@@ -34,7 +37,7 @@ namespace ShopWatches.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Supplier supplier)
+        public ActionResult Create(Suppliers supplier)
         {
             var check = db.Suppliers.Where(sup => sup.nameSup == supplier.nameSup).Count() > 0;
             if (check)
@@ -60,7 +63,7 @@ namespace ShopWatches.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Supplier supplier = db.Suppliers.Find(id);
+            Suppliers supplier = db.Suppliers.Find(id);
             if (supplier == null)
             {
                 return HttpNotFound();
@@ -73,7 +76,7 @@ namespace ShopWatches.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Supplier supplier)
+        public ActionResult Edit(Suppliers supplier)
         {
             if (ModelState.IsValid)
             {
@@ -93,7 +96,7 @@ namespace ShopWatches.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Supplier supplier = db.Suppliers.Find(id);
+            Suppliers supplier = db.Suppliers.Find(id);
             if (supplier == null)
             {
                 return HttpNotFound();

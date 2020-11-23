@@ -65,8 +65,8 @@
                                 <div class="form-group">
                                     <label class=" form-control-label">Email</label>
                                     <div class="input-group">
-                                        <div class="input-group-addon"><i class="fa fa-envelope-o"></i></div>
-                                        @Html.EditorFor(model => model.emailEmp, new { htmlAttributes = new {@class = "form-control", required = "" } })
+                                        <div class="input-group-addon"><i class="fa fa-envelope-o" ></i></div>
+                                        @Html.EditorFor(model => model.emailEmp, new { htmlAttributes = new {@class = "form-control", required = ""} })
                                     </div>
                                     @Html.ValidationMessageFor(model => model.emailEmp, "", new { @class = "text-danger" })
                                 </div>

@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "Checkout";
+    Layout = "~/Views/Shared/_LayoutHomePage.cshtml";
+}
+
+<div class="container">
+    <br />
+    <br />
+    <h3 class="text-center color-3">Checkout</h3>
+    <br />
+    <form action="CheckCode" method="post">
+        <div class="shipping_box col-lg-4">
+            <h3>Voucher Code:</h3>
+            <input type="text" class="form-control" id="code" name="code" />
+            <p class="text-danger"> @Session["mess"]</p>
+        </div>&nbsp
+        <button type="submit" class="button">Check</button>
+    </form>
+    <br />
+    <div class="checkout_btn_inner float-left">
+        <a class="btn_1" href="/Carts">Back</a>
+    </div>
+    <div class="checkout_btn_inner float-right">
+        <a class="btn_1" href="/Carts/BillPay">Payment</a>
+    </div>
+</div>
+@{Session["mess"] = "";
+}
+

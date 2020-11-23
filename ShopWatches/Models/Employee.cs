@@ -12,7 +12,7 @@ namespace ShopWatches.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Employee()
         {
-            Orders = new HashSet<Order>();
+            Orders = new HashSet<Orders>();
         }
 
         [Key]
@@ -20,27 +20,33 @@ namespace ShopWatches.Models
 
         public int? roleID { get; set; }
 
+        [RegularExpression(@"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$", ErrorMessage = "Email incorrect format.")]
         [StringLength(150)]
         public string emailEmp { get; set; }
 
+        [DataType(DataType.Password)]
         [StringLength(32)]
+        [RegularExpression(@"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$", ErrorMessage = "Password at least 8 characters including 1 capital character, 1 letter, number and special characters.")]
         public string passwordEmp { get; set; }
 
+        [RegularExpression(@"(?=^.{0,70}$)^[a-zA-Z-]+\s[a-zA-Z-]+$", ErrorMessage = "The name must be 2 words.")]
         [StringLength(50)]
         public string nameEmp { get; set; }
 
+        [RegularExpression(@"((09|03|07|08|05)+([0-9]{8})\b)", ErrorMessage = "Numberphone incorrect format.")]
         [StringLength(15)]
         public string phoneEmp { get; set; }
 
         public int? IDcard { get; set; }
 
+        [Required(ErrorMessage = "This field is required.")]
         [Column(TypeName = "text")]
         public string addressEmp { get; set; }
 
         [Column(TypeName = "date")]
         public DateTime? birthdayEmp { get; set; }
 
-        [StringLength(5)]
+        [StringLength(7)]
         public string genderEmp { get; set; }
 
         [Column(TypeName = "smalldatetime")]
@@ -49,6 +55,6 @@ namespace ShopWatches.Models
         public virtual Role Role { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<Orders> Orders { get; set; }
     }
 }

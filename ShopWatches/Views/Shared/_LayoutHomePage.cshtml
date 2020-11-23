@@ -1,5 +1,4 @@
 ﻿
-
 <!doctype html>
 <html class="no-js" lang="zxx">
 <head>
@@ -68,7 +67,7 @@
                                         <a href="#">Latest</a>
                                         <ul class="submenu">
                                             <li><a href="/Home/Menu"> Product list</a></li>
-                                            <li><a href="/Home/product_details"> Product Details</a></li>
+                                            
                                         </ul>
                                     </li>
                                 </ul>
@@ -78,26 +77,31 @@
                         <div class="header-right">
                             <ul>
                                 <li>
-                                    <div class="nav-search search-switch">
+                                    <div class="">
                                         <span class="flaticon-search"></span>
                                     </div>
                                 </li>
-
+                                <li><a href="/Carts"><span class="flaticon-shopping-cart"></span></a> </li>
                                 @if (cs != null)
                                 {
-                                        
-                            <div class="dropdown">
 
-                                <li> <a href="/Account/Login"><span class="flaticon-user"></span></a>Hello,  @cs.nameCtm </li>
-                                <li> <a href="/Account/Update"><span class="flaticon-heart"></span></a>Edit Profile</li>
-                                <li> <a href="/Account/Logout"><span class="flaticon-arrow"></span></a>Logout</li>
+                                    <div class="dropdown">
+                                        <button class="dropdown-toggle text-primary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Hello,  @cs.nameCtm
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a href="/Account/Update"><span class="flaticon-heart"> Edit Profile</span></a>&nbsp;<br />
+                                            <a href="/Orders"><span class="flaticon-heart text-center"> History Buy</span></a>&nbsp;<br />
+                                            <a href="/Account/Logout"><span class="flaticon-arrow "> Logout</span></a><br />
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <li> <a href="/Account/Login"><span class="flaticon-user"></span></a></li>
+                                }
 
 
-                            </div> 
-                            }else{
-                            <li> <a href="/Account/Login"><span class="flaticon-user"></span></a></li>}
-
-                                <li><a href="/Home/Cart"><span class="flaticon-shopping-cart"></span></a> </li>
 
                             </ul>
                         </div>

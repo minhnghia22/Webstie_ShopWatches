@@ -1,4 +1,4 @@
-﻿@model ShopWatches.Models.Category
+﻿@model ShopWatches.Models.Categories
 
 @{
     ViewBag.Title = "Create";
@@ -19,7 +19,7 @@
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
                             <li><a href="#">Admin</a></li>
-                            <li><a href="#">Category</a></li>
+                            <li><a href="#">Categories</a></li>
                             <li class="active">Create</li>
                         </ol>
                     </div>
@@ -40,17 +40,18 @@
                 @Html.Partial("_MessgeAlert")
                 <div class="card">
                     <div class="card-header">
-                        <b>Add Category </b>
+                        <b>Add Categories </b>
                         <div style="float: right">
                             @Html.ActionLink("Back to List", "Index")
                         </div>
                     </div>
                     <div class="card-body card-block">
+                        
                         <div class="form-group">
                             <label class=" form-control-label">Name Catagory</label>
                             <div class="input-group">
                                 <div class="input-group-addon"><i class="fa fa-user"></i></div>
-                                @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control", required = "" }   })
                             </div>
                             @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
                         </div>
@@ -58,13 +59,13 @@
                             <label class=" form-control-label">Descrption</label>
                             <div class="input-group">
                                 <div class="input-group-addon"><i class="fa fa-star-o"></i></div>
-                                @Html.TextAreaFor(model => model.descrption, new { @class = "form-control textArea" })
+                                @Html.TextAreaFor(model => model.descrption, new { @class = "form-control textArea", required = "" } )
                             </div>
                             @Html.ValidationMessageFor(model => model.descrption, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="col-xs-4 col-sm-4">
-                        <button type="submit" value="Create" class="btn btn-outline-success">Add new</button>&nbsp;
+                        <button type="submit" value="Create" class="btn btn-outline-success" >Add new</button>&nbsp;
                         <button type="reset" class="btn btn-outline-warning">Reset</button>&nbsp;
                     </div>
                 </div>

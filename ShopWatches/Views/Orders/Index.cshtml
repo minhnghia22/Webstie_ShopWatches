@@ -1,0 +1,73 @@
+﻿
+@model IEnumerable<ShopWatches.Models.Orders>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutHomePage.cshtml";
+}
+@if (Model.Count() > 0) { 
+<main>
+    <section class="cart_area section_padding">
+        <div class="container">
+            <div class="cart_inner">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr class="text-center">
+                                <th class="btn-danger text-white">ID</th>
+                                <th class="btn-danger text-white ">Customer</th>
+                                <th class="btn-danger text-white ">Date</th>
+                                <th class="btn-danger text-white ">Bill</th>
+                                <th class="btn-danger text-white ">Discount</th>
+                                <th class="btn-danger text-white ">Status</th>
+                                <th class="btn-danger text-white ">Option</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                          
+                            <tr class="text-center">
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ID)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Customer.nameCtm)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.requested)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.totalMoney) $
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.discount) $
+                                </td>ạ
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.statusOrder)
+                                </td>
+                                <td>
+                                    <a href="Orders/Details/@item.ID" class="btn-warning">Details</a>
+
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <div class="checkout_btn_inner float-left">
+                        <a class="btn_1" href="/Home/Menu">Continue Shopping</a>
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--================End Cart Area =================-->
+</main>
+}else{
+<h2 class="text-center">No items in your cart!!</h2>
+}
+
